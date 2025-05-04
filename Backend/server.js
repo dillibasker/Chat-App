@@ -1,3 +1,5 @@
+const cors = require("cors"); 
+
 require("dotenv").config();
 const express = require("express");
 const http = require("http");
@@ -8,10 +10,11 @@ const contactRoutes = require("./routes/contactRoutes");
 const socketHandler = require("./socket");
 
 const app = express();
+
 const server = http.createServer(app);
 socketHandler(server);
 connectDB();
-
+app.use(cors({origin:"http://localhost:5173" , methods:["GET","POST"],credentials:true})); // Allow requests from the frontend
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
