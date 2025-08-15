@@ -11,6 +11,7 @@ export default function Login() {
   const handleLogin = async () => {
     const { data } = await axios.post("http://localhost:5000/api/auth/login", { phone });
     setUser(data);
+    console.log("setted data");
     navigate("/");
   };
 
